@@ -8,6 +8,8 @@ The CROWler Rules Converters are a set of tools that allow to convert the
 **Please Note**: This is a work in progress. The converters are not yet
 complete and may not work as expected.
 
+If you need the CROWler, you can find it [here](https://github.com/pzaino/thecrowler)
+
 ## Installation
 
 To install the CROWler Rules Converters, you need to have Go Lang 1.22
