@@ -20,3 +20,18 @@
 # Go workspace file
 go.work
 go.work.sum
+
+# Dev environments
+.idea/
+.vscode/
+*.sublime-workspace
+
+# Build artifacts
+*.o
+*.a
+*.out
+*.elf
+/convert*
+/test_out/*.yaml
+/test_out/*.yml
+/test_out/*.json
