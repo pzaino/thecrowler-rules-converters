@@ -1,5 +1,5 @@
 module gotests/thecrowler-rules-converters
 
-go 1.22.2
+go 1.22.3
 
 require gopkg.in/yaml.v3 v3.0.1
