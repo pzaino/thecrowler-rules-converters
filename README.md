@@ -55,7 +55,3 @@ information, please see the [LICENSE](LICENSE) file.
 
 If you want to contribute to the CROWler Rules Converters, please read
 the [CONTRIBUTING](CONTRIBUTING.md) file for more information.
-
-## Contributors
-
-- [@pzaino](https://github.com/pzaino) <br> <img src="https://avatars.githubusercontent.com/u/pzaino?v=4" width="50" height="50"/>
