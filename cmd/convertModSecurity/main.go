@@ -134,8 +134,8 @@ func createDetectionRuleFromModSecurity(modsecRule *ModSecurityRule) DetectionRu
 }
 
 func main() {
-	inpPath := flag.String("source", "", "Path to the ModSecurity rules file")
-	outPath := flag.String("output", "./", "Path to the output directory")
+	inpPath := flag.String("i", "", "Path to the ModSecurity rules file")
+	outPath := flag.String("o", "./", "Path to the output directory")
 	flag.Parse()
 
 	// Open the ModSecurity rules file

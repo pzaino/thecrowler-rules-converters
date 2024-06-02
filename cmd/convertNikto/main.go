@@ -99,8 +99,8 @@ func createFaviconRule(id, md5hash, description string) DetectionRule {
 }
 
 func main() {
-	inpPath := flag.String("source", "", "Path to the db_favicon file")
-	outPath := flag.String("output", "./", "Path to the output directory")
+	inpPath := flag.String("i", "", "Path to the db_favicon file")
+	outPath := flag.String("o", "./", "Path to the output directory")
 	flag.Parse()
 
 	// Open the db_favicon file
@@ -129,9 +129,7 @@ func main() {
 	}
 
 	// Read the header line
-	if scanner.Scan() {
-		// skip header line
-	}
+	_ = scanner.Scan() // Skip the header line
 
 	// Process each line of the file
 	for scanner.Scan() {

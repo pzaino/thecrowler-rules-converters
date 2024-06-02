@@ -133,8 +133,8 @@ func createRule(name string, details WappalyzerTechnology) DetectionRule {
 }
 
 func main() {
-	inpPath := flag.String("source", "", "Path to the Wappalyzer technologies.json file")
-	outPath := flag.String("output", "./", "Path to the output directory")
+	inpPath := flag.String("i", "", "Path to the Wappalyzer technologies.json file")
+	outPath := flag.String("o", "./", "Path to the output directory")
 	flag.Parse()
 
 	// Read technologies.json
