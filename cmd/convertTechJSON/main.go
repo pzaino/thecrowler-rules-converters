@@ -64,7 +64,6 @@ type DetectionRule struct {
 	ObjectName          string                 `yaml:"object_name"`
 	Implies             []string               `yaml:"implies,omitempty"`
 	HTTPHeaderFields    []HTTPHeaderField      `yaml:"http_header_fields,omitempty"`
-	Cookies             []HTTPHeaderField      `yaml:"cookies,omitempty"`
 	MetaTags            []MetaTag              `yaml:"meta_tags,omitempty"`
 	PageContentPatterns []PageContentSignature `yaml:"page_content_patterns,omitempty"`
 	SSLSignatures       []SSLSignature         `yaml:"ssl_patterns,omitempty"`
@@ -230,7 +229,7 @@ func createRule(name string, details Technology) DetectionRule {
 
 	if details.Cookies != nil {
 		for k, v := range details.Cookies {
-			rule.Cookies = append(rule.Cookies, HTTPHeaderField{
+			rule.HTTPHeaderFields = append(rule.HTTPHeaderFields, HTTPHeaderField{
 				Key:        k,
 				Value:      []string{v},
 				Confidence: 10,
@@ -309,6 +308,21 @@ func createRule(name string, details Technology) DetectionRule {
 		}
 	}
 
+	if details.Website != "" {
+		rule.URLPatterns = append(rule.URLPatterns, URLMicroSignature{
+			Signature:  details.Website,
+			Confidence: 10,
+		})
+
+		// Add a page content pattern for the website URL
+		rule.PageContentPatterns = append(rule.PageContentPatterns, PageContentSignature{
+			Key:        "a",
+			Attribute:  "href",
+			Signature:  []string{details.Website},
+			Confidence: 10,
+		})
+	}
+
 	return rule
 }
 
@@ -349,7 +363,7 @@ func main() {
 					Description:   fmt.Sprintf("Ruleset to detect %s technologies.", strings.ReplaceAll(category, "_", " ")),
 					RuleGroups: []RuleGroup{
 						{
-							GroupName:      "detect_web_technologies",
+							GroupName:      "detect_web_technologies_" + category,
 							IsEnabled:      true,
 							DetectionRules: []DetectionRule{},
 						},
@@ -365,6 +379,7 @@ func main() {
 
 	// Write to multiple YAML files
 	for category, ruleset := range rulesets {
+		fmt.Printf("Writing ruleset for %s...\n", category)
 		filename := fmt.Sprintf((*outPath)+"/detect-%s-ruleset.yaml", category)
 		file, err := os.Create(filename)
 		if err != nil {
