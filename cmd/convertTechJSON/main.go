@@ -321,6 +321,14 @@ func createRule(name string, details Technology) DetectionRule {
 			Signature:  []string{details.Website},
 			Confidence: 10,
 		})
+
+		// Add a page content pattern for the website URL using the link tag
+		rule.PageContentPatterns = append(rule.PageContentPatterns, PageContentSignature{
+			Key:        "link",
+			Attribute:  "href",
+			Signature:  []string{details.Website},
+			Confidence: 10,
+		})
 	}
 
 	return rule
